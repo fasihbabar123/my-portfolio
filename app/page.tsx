@@ -16,7 +16,7 @@ const projects = [
       "A responsive personal portfolio website built to showcase my skills, projects, and contact information as I grow as a full-stack developer.",
     tech: ["Next.js", "TypeScript", "Tailwind CSS"],
     github: "https://github.com/fasihbabar123/my-portfolio",
-    live: "#",
+    live: "https://my-portfolio-blue-beta-29.vercel.app",
     status: "Completed",
   },
   {
