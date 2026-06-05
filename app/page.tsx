@@ -1,3 +1,7 @@
+"use client";
+
+import { useState } from "react";
+
 const skills = [
   "JavaScript",
   "TypeScript",
@@ -40,6 +44,60 @@ const projects = [
 ];
 
 export default function Home() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+
+  const [formStatus, setFormStatus] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  function handleChange(
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) {
+    const { name, value } = event.target;
+
+    setFormData((previousData) => ({
+      ...previousData,
+      [name]: value,
+    }));
+  }
+
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    setIsSubmitting(true);
+    setFormStatus("");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setFormStatus(data.error || "Something went wrong.");
+        return;
+      }
+
+      setFormStatus(data.message);
+      setFormData({
+        name: "",
+        email: "",
+        message: "",
+      });
+    } catch {
+      setFormStatus("Could not send message. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
   return (
     <main className="min-h-screen bg-slate-950 text-white">
             <header className="fixed top-0 z-50 w-full border-b border-slate-800 bg-slate-950/90 backdrop-blur">
@@ -186,21 +244,101 @@ export default function Home() {
     ))}
   </div>
 </section>
+<section className="mx-auto max-w-5xl px-6 py-16" id="contact">
+        <div className="grid gap-10 md:grid-cols-2 md:items-start">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.25em] text-cyan-400">
+              Contact
+            </p>
 
-      <section className="mx-auto max-w-5xl px-6 py-16" id="contact">
-        <h2 className="text-3xl font-bold">Contact</h2>
-        <p className="mt-4 text-slate-300">
-          I&apos;m open to junior developer roles, internships, freelance
-          projects, and learning opportunities.
-        </p>
+            <h2 className="mt-3 text-3xl font-bold">Let&apos;s Connect</h2>
 
-        <div className="mt-6">
-          <a
-            href="mailto:fasihbabar901@gmail.com"
-            className="text-cyan-400 hover:text-cyan-300"
+            <p className="mt-4 leading-8 text-slate-300">
+              I&apos;m open to junior developer roles, internships, freelance
+              projects, and learning opportunities. Send me a message and
+              I&apos;ll get back to you.
+            </p>
+
+            <div className="mt-6">
+              <a
+                href="mailto:fasihbabar901@gmail.com"
+                className="text-cyan-400 hover:text-cyan-300"
+              >
+                fasihbabar901@gmail.com
+              </a>
+            </div>
+          </div>
+
+          <form
+            onSubmit={handleSubmit}
+            className="rounded-2xl border border-slate-800 bg-slate-900 p-6"
           >
-            fasihbabar901@gmail.com
-          </a>
+            <div>
+              <label
+                htmlFor="name"
+                className="text-sm font-medium text-slate-200"
+              >
+                Name
+              </label>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="Your name"
+                className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none transition placeholder:text-slate-500 focus:border-cyan-400"
+              />
+            </div>
+
+            <div className="mt-5">
+              <label
+                htmlFor="email"
+                className="text-sm font-medium text-slate-200"
+              >
+                Email
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="your@email.com"
+                className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none transition placeholder:text-slate-500 focus:border-cyan-400"
+              />
+            </div>
+
+            <div className="mt-5">
+              <label
+                htmlFor="message"
+                className="text-sm font-medium text-slate-200"
+              >
+                Message
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                placeholder="Write your message..."
+                rows={5}
+                className="mt-2 w-full resize-none rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none transition placeholder:text-slate-500 focus:border-cyan-400"
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="mt-6 w-full rounded-xl bg-cyan-400 px-5 py-3 font-semibold text-slate-950 transition hover:bg-cyan-300 disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              {isSubmitting ? "Sending..." : "Send Message"}
+            </button>
+
+            {formStatus && (
+              <p className="mt-4 text-sm text-cyan-300">{formStatus}</p>
+            )}
+          </form>
         </div>
       </section>
     </main>
