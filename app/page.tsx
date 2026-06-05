@@ -13,20 +13,29 @@ const projects = [
   {
     title: "Portfolio Website",
     description:
-      "A personal developer portfolio built with Next.js and Tailwind CSS to showcase my skills, projects, and contact information.",
+      "A responsive personal portfolio website built to showcase my skills, projects, and contact information as I grow as a full-stack developer.",
     tech: ["Next.js", "TypeScript", "Tailwind CSS"],
+    github: "https://github.com/fasihbabar123/my-portfolio",
+    live: "#",
+    status: "Completed",
   },
   {
     title: "AI Resume Analyzer",
     description:
-      "A planned AI-powered tool that analyzes resumes and gives feedback on skills, structure, and project descriptions.",
+      "An upcoming AI-powered web app that will analyze resume content and provide feedback on structure, skills, project descriptions, and job readiness.",
     tech: ["Next.js", "AI API", "Supabase"],
+    github: "#",
+    live: "#",
+    status: "Planned",
   },
   {
     title: "Job Application Tracker",
     description:
-      "A planned full-stack app to track job applications, statuses, notes, and interview progress.",
+      "An upcoming full-stack app for tracking job applications, statuses, notes, and interview progress using authentication and a database.",
     tech: ["Next.js", "Supabase", "Authentication"],
+    github: "#",
+    live: "#",
+    status: "Planned",
   },
 ];
 
@@ -55,7 +64,7 @@ export default function Home() {
           </div>
         </nav>
       </header>
-      <section className="mx-auto flex min-h-screen max-w-5xl flex-col justify-center px-6 py-20">
+      <section className="mx-auto flex min-h-screen max-w-5xl flex-col justify-center px-6 pb-20 pt-32">
         <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-cyan-400">
           Computer Science Graduate
         </p>
@@ -113,34 +122,70 @@ export default function Home() {
       </section>
 
       <section className="mx-auto max-w-5xl px-6 py-16" id="projects">
-        <h2 className="text-3xl font-bold">Projects</h2>
+  <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+    <div>
+      <p className="text-sm font-semibold uppercase tracking-[0.25em] text-cyan-400">
+        My Work
+      </p>
+      <h2 className="mt-3 text-3xl font-bold">Projects</h2>
+    </div>
 
-        <div className="mt-8 grid gap-6 md:grid-cols-3">
-          {projects.map((project) => (
-            <article
-              key={project.title}
-              className="rounded-2xl border border-slate-800 bg-slate-900 p-6"
+    <p className="max-w-xl text-sm leading-6 text-slate-400">
+      These projects show my progress as I build practical full-stack apps,
+      work with APIs, and learn modern development tools.
+    </p>
+  </div>
+
+  <div className="mt-8 grid gap-6 md:grid-cols-3">
+    {projects.map((project) => (
+      <article
+        key={project.title}
+        className="flex flex-col rounded-2xl border border-slate-800 bg-slate-900 p-6 transition hover:-translate-y-1 hover:border-cyan-400/60"
+      >
+        <div className="flex items-center justify-between gap-4">
+          <h3 className="text-xl font-semibold">{project.title}</h3>
+
+          <span className="rounded-full border border-cyan-400/40 px-3 py-1 text-xs text-cyan-300">
+            {project.status}
+          </span>
+        </div>
+
+        <p className="mt-4 flex-1 text-sm leading-6 text-slate-300">
+          {project.description}
+        </p>
+
+        <div className="mt-5 flex flex-wrap gap-2">
+          {project.tech.map((item) => (
+            <span
+              key={item}
+              className="rounded-full bg-slate-800 px-3 py-1 text-xs text-cyan-300"
             >
-              <h3 className="text-xl font-semibold">{project.title}</h3>
-
-              <p className="mt-3 text-sm leading-6 text-slate-300">
-                {project.description}
-              </p>
-
-              <div className="mt-5 flex flex-wrap gap-2">
-                {project.tech.map((item) => (
-                  <span
-                    key={item}
-                    className="rounded-full bg-slate-800 px-3 py-1 text-xs text-cyan-300"
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </article>
+              {item}
+            </span>
           ))}
         </div>
-      </section>
+
+        <div className="mt-6 flex gap-3">
+          <a
+            href={project.github}
+            target="_blank"
+            className="rounded-full border border-slate-700 px-4 py-2 text-sm font-semibold text-slate-200 transition hover:border-cyan-400 hover:text-cyan-400"
+          >
+            GitHub
+          </a>
+
+          <a
+            href={project.live}
+            target="_blank"
+            className="rounded-full bg-cyan-400 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300"
+          >
+            Live Demo
+          </a>
+        </div>
+      </article>
+    ))}
+  </div>
+</section>
 
       <section className="mx-auto max-w-5xl px-6 py-16" id="contact">
         <h2 className="text-3xl font-bold">Contact</h2>
