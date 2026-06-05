@@ -33,6 +33,28 @@ const projects = [
 export default function Home() {
   return (
     <main className="min-h-screen bg-slate-950 text-white">
+            <header className="fixed top-0 z-50 w-full border-b border-slate-800 bg-slate-950/90 backdrop-blur">
+        <nav className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
+          <a href="#" className="text-lg font-bold tracking-tight">
+            Fasih Babar
+          </a>
+
+          <div className="hidden gap-6 text-sm text-slate-300 sm:flex">
+            <a href="#about" className="transition hover:text-cyan-400">
+              About
+            </a>
+            <a href="#skills" className="transition hover:text-cyan-400">
+              Skills
+            </a>
+            <a href="#projects" className="transition hover:text-cyan-400">
+              Projects
+            </a>
+            <a href="#contact" className="transition hover:text-cyan-400">
+              Contact
+            </a>
+          </div>
+        </nav>
+      </header>
       <section className="mx-auto flex min-h-screen max-w-5xl flex-col justify-center px-6 py-20">
         <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-cyan-400">
           Computer Science Graduate
