@@ -10,7 +10,11 @@ const skills = [
   "Tailwind CSS",
   "Git",
   "GitHub",
-  "APIs",
+  "REST APIs",
+  "JSON",
+  "Frontend Development",
+  "Backend Routes",
+  "Vercel Deployment",
 ];
 
 const projects = [
@@ -23,6 +27,17 @@ const projects = [
     live: "https://my-portfolio-blue-beta-29.vercel.app",
     status: "Completed",
   },
+
+  {
+    title: "Weather API Demo",
+    description:
+      "A small API practice feature that lets users search for a city and view live weather data using a custom Next.js API route and an external weather API.",
+    tech: ["Next.js", "API Routes", "External API", "JSON"],
+    github: "https://github.com/fasihbabar123/my-portfolio",
+    live: "https://my-portfolio-blue-beta-29.vercel.app",
+    status: "Completed",
+  },
+
   {
     title: "AI Resume Analyzer",
     description:
@@ -158,6 +173,9 @@ export default function Home() {
             <a href="#projects" className="transition hover:text-cyan-400">
               Projects
             </a>
+            <a href="#api-demo" className="transition hover:text-cyan-400">
+              API Demo
+            </a>
             <a href="#contact" className="transition hover:text-cyan-400">
               Contact
             </a>
@@ -197,12 +215,24 @@ export default function Home() {
       </section>
 
       <section className="mx-auto max-w-5xl px-6 py-16" id="about">
-        <h2 className="text-3xl font-bold">About Me</h2>
+        <p className="text-sm font-semibold uppercase tracking-[0.25em] text-cyan-400">
+          About
+        </p>
+
+        <h2 className="mt-3 text-3xl font-bold">About Me</h2>
+
         <p className="mt-4 max-w-3xl leading-8 text-slate-300">
           I have completed a Bachelor&apos;s in Computer Science and I&apos;m
-          currently building practical projects to strengthen my development
-          skills. My focus is on learning by building real applications using
-          Next.js, APIs, databases, and AI tools.
+          currently building practical full-stack projects to strengthen my
+          development skills. My focus is on creating useful web applications
+          with Next.js, APIs, databases, authentication, and AI-powered
+          features.
+        </p>
+
+        <p className="mt-4 max-w-3xl leading-8 text-slate-300">
+          I&apos;m using this portfolio to document my progress, showcase my
+          projects, and build real examples that demonstrate how I work with
+          frontend interfaces, backend routes, external APIs, and deployment.
         </p>
       </section>
 
@@ -297,9 +327,10 @@ export default function Home() {
             <h2 className="mt-3 text-3xl font-bold">Weather API Demo</h2>
 
             <p className="mt-4 leading-8 text-slate-300">
-              This small feature uses my own Next.js API route to call an
-              external weather API. It helps me practice request handling,
-              JSON responses, and frontend-backend communication.
+             This feature demonstrates a full API flow: the user enters a city,
+             the frontend sends the city to a custom Next.js API route, the backend
+             calls an external weather API, and the result is returned as JSON and
+             displayed on the page.
             </p>
           </div>
 
