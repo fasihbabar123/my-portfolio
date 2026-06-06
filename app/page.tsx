@@ -52,6 +52,16 @@ export default function Home() {
 
   const [formStatus, setFormStatus] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [weatherCity, setWeatherCity] = useState("");
+  const [weatherResult, setWeatherResult] = useState<{
+    city: string;
+    country: string;
+    temperature: number;
+    windSpeed: number;
+    humidity: number;
+  } | null>(null);
+  const [weatherStatus, setWeatherStatus] = useState("");
+  const [isWeatherLoading, setIsWeatherLoading] = useState(false);
 
   function handleChange(
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -98,6 +108,38 @@ export default function Home() {
       setIsSubmitting(false);
     }
   }
+  async function handleWeatherSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    setIsWeatherLoading(true);
+    setWeatherStatus("");
+    setWeatherResult(null);
+
+    try {
+      const response = await fetch("/api/weather", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ city: weatherCity }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setWeatherStatus(data.error || "Could not fetch weather.");
+        return;
+      }
+
+      setWeatherResult(data);
+      setWeatherCity("");
+    } catch {
+      setWeatherStatus("Could not connect to weather API.");
+    } finally {
+      setIsWeatherLoading(false);
+    }
+  }
+
   return (
     <main className="min-h-screen bg-slate-950 text-white">
             <header className="fixed top-0 z-50 w-full border-b border-slate-800 bg-slate-950/90 backdrop-blur">
@@ -244,6 +286,73 @@ export default function Home() {
     ))}
   </div>
 </section>
+
+<section className="mx-auto max-w-5xl px-6 py-16" id="api-demo">
+        <div className="grid gap-10 md:grid-cols-2 md:items-start">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.25em] text-cyan-400">
+              API Practice
+            </p>
+
+            <h2 className="mt-3 text-3xl font-bold">Weather API Demo</h2>
+
+            <p className="mt-4 leading-8 text-slate-300">
+              This small feature uses my own Next.js API route to call an
+              external weather API. It helps me practice request handling,
+              JSON responses, and frontend-backend communication.
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-slate-800 bg-slate-900 p-6">
+            <form onSubmit={handleWeatherSubmit}>
+              <label
+                htmlFor="weatherCity"
+                className="text-sm font-medium text-slate-200"
+              >
+                City
+              </label>
+
+              <div className="mt-2 flex gap-3">
+                <input
+                  id="weatherCity"
+                  type="text"
+                  value={weatherCity}
+                  onChange={(event) => setWeatherCity(event.target.value)}
+                  placeholder="Example: Lahore"
+                  className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none transition placeholder:text-slate-500 focus:border-cyan-400"
+                />
+
+                <button
+                  type="submit"
+                  disabled={isWeatherLoading}
+                  className="rounded-xl bg-cyan-400 px-5 py-3 font-semibold text-slate-950 transition hover:bg-cyan-300 disabled:cursor-not-allowed disabled:opacity-60"
+                >
+                  {isWeatherLoading ? "Loading..." : "Search"}
+                </button>
+              </div>
+            </form>
+
+            {weatherStatus && (
+              <p className="mt-4 text-sm text-red-300">{weatherStatus}</p>
+            )}
+
+            {weatherResult && (
+              <div className="mt-6 rounded-xl border border-slate-800 bg-slate-950 p-5">
+                <h3 className="text-xl font-semibold">
+                  {weatherResult.city}, {weatherResult.country}
+                </h3>
+
+                <div className="mt-4 grid gap-3 text-sm text-slate-300">
+                  <p>Temperature: {weatherResult.temperature}°C</p>
+                  <p>Humidity: {weatherResult.humidity}%</p>
+                  <p>Wind Speed: {weatherResult.windSpeed} km/h</p>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
 <section className="mx-auto max-w-5xl px-6 py-16" id="contact">
         <div className="grid gap-10 md:grid-cols-2 md:items-start">
           <div>
