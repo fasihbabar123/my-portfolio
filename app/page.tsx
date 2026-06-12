@@ -41,12 +41,13 @@ const projects = [
   {
     title: "AI Resume Analyzer",
     description:
-      "An upcoming AI-powered web app that will analyze resume content and provide feedback on structure, skills, project descriptions, and job readiness.",
-    tech: ["Next.js", "AI API", "Supabase"],
-    github: "#",
-    live: "#",
-    status: "Planned",
+      "A resume feedback web app that analyzes resume text and returns a score, strengths, improvements, missing skills, and suggested project bullet points.",
+    tech: ["Next.js", "TypeScript", "API Routes", "Tailwind CSS"],
+    github: "https://github.com/fasihbabar123/ai-resume-analyzer",
+    live: "https://ai-resume-analyzer-murex-nine.vercel.app",
+    status: "In Progress",
   },
+
   {
     title: "Job Application Tracker",
     description:
