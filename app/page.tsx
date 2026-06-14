@@ -28,15 +28,7 @@ const projects = [
     status: "Completed",
   },
 
-  {
-    title: "Weather API Demo",
-    description:
-      "A small API practice feature that lets users search for a city and view live weather data using a custom Next.js API route and an external weather API.",
-    tech: ["Next.js", "API Routes", "External API", "JSON"],
-    github: "https://github.com/fasihbabar123/my-portfolio",
-    live: "https://my-portfolio-blue-beta-29.vercel.app",
-    status: "Completed",
-  },
+ 
 
   {
     title: "AI Resume Analyzer",
