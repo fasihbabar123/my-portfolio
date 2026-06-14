@@ -51,11 +51,11 @@ const projects = [
   {
     title: "Job Application Tracker",
     description:
-      "An upcoming full-stack app for tracking job applications, statuses, notes, and interview progress using authentication and a database.",
-    tech: ["Next.js", "Supabase", "Authentication"],
-    github: "#",
-    live: "#",
-    status: "Planned",
+      "A job tracking dashboard that lets users add, filter, and delete job applications while viewing application status statistics.",
+    tech: ["Next.js", "TypeScript", "React State", "Tailwind CSS"],
+    github: "https://github.com/fasihbabar123/job-application-tracker",
+    live: "https://job-application-tracker-rouge-nu.vercel.app",
+    status: "In Progress",
   },
 ];
 
