@@ -21,7 +21,7 @@ const projects = [
   {
     title: "Portfolio Website",
     description:
-      "A responsive personal portfolio website built to showcase my skills, projects, and contact information as I grow as a full-stack developer.",
+      "A responsive personal portfolio website built to showcase my skills, projects, contact form, and Weather API Demo.",
     tech: ["Next.js", "TypeScript", "Tailwind CSS"],
     github: "https://github.com/fasihbabar123/my-portfolio",
     live: "https://my-portfolio-blue-beta-29.vercel.app",
@@ -37,17 +37,17 @@ const projects = [
     tech: ["Next.js", "TypeScript", "API Routes", "Tailwind CSS"],
     github: "https://github.com/fasihbabar123/ai-resume-analyzer",
     live: "https://ai-resume-analyzer-murex-nine.vercel.app",
-    status: "In Progress",
+    status: "Completed",
   },
 
   {
     title: "Job Application Tracker",
     description:
-      "A job tracking dashboard that lets users add, filter, and delete job applications while viewing application status statistics.",
-    tech: ["Next.js", "TypeScript", "React State", "Tailwind CSS"],
+      "A full-stack job tracking dashboard that lets users add, edit, delete, search, and filter job applications using a Supabase database.",
+    tech: ["Next.js", "TypeScript", "Supabase", "Tailwind CSS"],
     github: "https://github.com/fasihbabar123/job-application-tracker",
     live: "https://job-application-tracker-rouge-nu.vercel.app",
-    status: "In Progress",
+    status: "Completed",
   },
 ];
 
