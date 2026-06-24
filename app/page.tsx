@@ -2,34 +2,39 @@
 
 import { useState } from "react";
 
-const skills = [
-  "JavaScript",
-  "TypeScript",
-  "React",
-  "Next.js",
-  "Tailwind CSS",
-  "Git",
-  "GitHub",
-  "REST APIs",
-  "JSON",
-  "Frontend Development",
-  "Backend Routes",
-  "Vercel Deployment",
+const skillGroups = [
+  {
+    title: "Frontend",
+    skills: [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "React",
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+    ],
+  },
+  {
+    title: "Backend & Database",
+    skills: ["API Routes", "REST APIs", "Supabase", "PostgreSQL", "JSON"],
+  },
+  {
+    title: "Tools & Deployment",
+    skills: ["Git", "GitHub", "GitHub Desktop", "Vercel", "Cursor", "VS Code"],
+  },
 ];
 
 const projects = [
   {
-    title: "Portfolio Website",
+    title: "Personal Portfolio Website",
     description:
       "A responsive personal portfolio website built to showcase my skills, projects, contact form, and Weather API Demo.",
-    tech: ["Next.js", "TypeScript", "Tailwind CSS"],
+    tech: ["Next.js", "TypeScript", "Tailwind CSS", "API Routes"],
     github: "https://github.com/fasihbabar123/my-portfolio",
     live: "https://my-portfolio-blue-beta-29.vercel.app",
     status: "Completed",
   },
-
- 
-
   {
     title: "AI Resume Analyzer",
     description:
@@ -39,7 +44,6 @@ const projects = [
     live: "https://ai-resume-analyzer-murex-nine.vercel.app",
     status: "Completed",
   },
-
   {
     title: "Job Application Tracker",
     description:
@@ -60,6 +64,7 @@ export default function Home() {
 
   const [formStatus, setFormStatus] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+
   const [weatherCity, setWeatherCity] = useState("");
   const [weatherResult, setWeatherResult] = useState<{
     city: string;
@@ -116,6 +121,7 @@ export default function Home() {
       setIsSubmitting(false);
     }
   }
+
   async function handleWeatherSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -150,7 +156,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-slate-950 text-white">
-            <header className="fixed top-0 z-50 w-full border-b border-slate-800 bg-slate-950/90 backdrop-blur">
+      <header className="fixed top-0 z-50 w-full border-b border-slate-800 bg-slate-950/90 backdrop-blur">
         <nav className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
           <a href="#" className="text-lg font-bold tracking-tight">
             Fasih Babar
@@ -175,6 +181,7 @@ export default function Home() {
           </div>
         </nav>
       </header>
+
       <section className="mx-auto flex min-h-screen max-w-5xl flex-col justify-center px-6 pb-20 pt-32">
         <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-cyan-400">
           Computer Science Graduate
@@ -185,9 +192,10 @@ export default function Home() {
         </h1>
 
         <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300">
-          I&apos;m building my portfolio as an aspiring full-stack developer,
-          focusing on modern web apps, APIs, AI-powered tools, and clean
-          user-friendly interfaces.
+          I build responsive web applications using Next.js, React, TypeScript,
+          Tailwind CSS, and Supabase. I am focused on creating practical
+          full-stack projects with clean UI, API integration, and real database
+          functionality.
         </p>
 
         <div className="mt-8 flex flex-wrap gap-4">
@@ -203,6 +211,15 @@ export default function Home() {
             className="rounded-full border border-slate-600 px-6 py-3 font-semibold text-white transition hover:border-cyan-400 hover:text-cyan-400"
           >
             Contact Me
+          </a>
+
+          <a
+            href="https://github.com/fasihbabar123"
+            target="_blank"
+            rel="noreferrer"
+            className="rounded-full border border-slate-600 px-6 py-3 font-semibold text-white transition hover:border-cyan-400 hover:text-cyan-400"
+          >
+            GitHub
           </a>
         </div>
       </section>
@@ -225,92 +242,117 @@ export default function Home() {
         <p className="mt-4 max-w-3xl leading-8 text-slate-300">
           I&apos;m using this portfolio to document my progress, showcase my
           projects, and build real examples that demonstrate how I work with
-          frontend interfaces, backend routes, external APIs, and deployment.
+          frontend interfaces, backend routes, external APIs, databases, and
+          deployment.
         </p>
       </section>
 
       <section className="mx-auto max-w-5xl px-6 py-16" id="skills">
-        <h2 className="text-3xl font-bold">Skills I&apos;m Building</h2>
+        <p className="text-sm font-semibold uppercase tracking-[0.25em] text-cyan-400">
+          Skills
+        </p>
 
-        <div className="mt-8 flex flex-wrap gap-3">
-          {skills.map((skill) => (
-            <span
-              key={skill}
-              className="rounded-full border border-slate-700 bg-slate-900 px-4 py-2 text-sm text-slate-200"
+        <h2 className="mt-3 text-3xl font-bold">Technical Skills</h2>
+
+        <p className="mt-4 max-w-2xl leading-7 text-slate-300">
+          Technologies I have used while building and deploying my portfolio
+          projects.
+        </p>
+
+        <div className="mt-8 grid gap-6 md:grid-cols-3">
+          {skillGroups.map((group) => (
+            <div
+              key={group.title}
+              className="rounded-2xl border border-slate-800 bg-slate-900 p-6"
             >
-              {skill}
-            </span>
+              <h3 className="text-xl font-semibold text-white">
+                {group.title}
+              </h3>
+
+              <div className="mt-5 flex flex-wrap gap-3">
+                {group.skills.map((skill) => (
+                  <span
+                    key={skill}
+                    className="rounded-full border border-slate-700 bg-slate-950 px-4 py-2 text-sm text-slate-300"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
           ))}
         </div>
       </section>
 
       <section className="mx-auto max-w-5xl px-6 py-16" id="projects">
-  <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-    <div>
-      <p className="text-sm font-semibold uppercase tracking-[0.25em] text-cyan-400">
-        My Work
-      </p>
-      <h2 className="mt-3 text-3xl font-bold">Projects</h2>
-    </div>
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.25em] text-cyan-400">
+              My Work
+            </p>
+            <h2 className="mt-3 text-3xl font-bold">Projects</h2>
+          </div>
 
-    <p className="max-w-xl text-sm leading-6 text-slate-400">
-      These projects show my progress as I build practical full-stack apps,
-      work with APIs, and learn modern development tools.
-    </p>
-  </div>
-
-  <div className="mt-8 grid gap-6 md:grid-cols-3">
-    {projects.map((project) => (
-      <article
-        key={project.title}
-        className="flex flex-col rounded-2xl border border-slate-800 bg-slate-900 p-6 transition hover:-translate-y-1 hover:border-cyan-400/60"
-      >
-        <div className="flex items-center justify-between gap-4">
-          <h3 className="text-xl font-semibold">{project.title}</h3>
-
-          <span className="rounded-full border border-cyan-400/40 px-3 py-1 text-xs text-cyan-300">
-            {project.status}
-          </span>
+          <p className="max-w-xl text-sm leading-6 text-slate-400">
+            These projects show my progress as I build practical full-stack
+            apps, work with APIs, and learn modern development tools.
+          </p>
         </div>
 
-        <p className="mt-4 flex-1 text-sm leading-6 text-slate-300">
-          {project.description}
-        </p>
-
-        <div className="mt-5 flex flex-wrap gap-2">
-          {project.tech.map((item) => (
-            <span
-              key={item}
-              className="rounded-full bg-slate-800 px-3 py-1 text-xs text-cyan-300"
+        <div className="mt-8 grid gap-6 md:grid-cols-3">
+          {projects.map((project) => (
+            <article
+              key={project.title}
+              className="flex flex-col rounded-2xl border border-slate-800 bg-slate-900 p-6 transition hover:-translate-y-1 hover:border-cyan-400/60"
             >
-              {item}
-            </span>
+              <div className="flex items-center justify-between gap-4">
+                <h3 className="text-xl font-semibold">{project.title}</h3>
+
+                <span className="rounded-full border border-cyan-400/40 px-3 py-1 text-xs text-cyan-300">
+                  {project.status}
+                </span>
+              </div>
+
+              <p className="mt-4 flex-1 text-sm leading-6 text-slate-300">
+                {project.description}
+              </p>
+
+              <div className="mt-5 flex flex-wrap gap-2">
+                {project.tech.map((item) => (
+                  <span
+                    key={item}
+                    className="rounded-full bg-slate-800 px-3 py-1 text-xs text-cyan-300"
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
+
+              <div className="mt-6 flex gap-3">
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="rounded-full border border-slate-700 px-4 py-2 text-sm font-semibold text-slate-200 transition hover:border-cyan-400 hover:text-cyan-400"
+                >
+                  GitHub
+                </a>
+
+                <a
+                  href={project.live}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="rounded-full bg-cyan-400 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300"
+                >
+                  Live Demo
+                </a>
+              </div>
+            </article>
           ))}
         </div>
+      </section>
 
-        <div className="mt-6 flex gap-3">
-          <a
-            href={project.github}
-            target="_blank"
-            className="rounded-full border border-slate-700 px-4 py-2 text-sm font-semibold text-slate-200 transition hover:border-cyan-400 hover:text-cyan-400"
-          >
-            GitHub
-          </a>
-
-          <a
-            href={project.live}
-            target="_blank"
-            className="rounded-full bg-cyan-400 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300"
-          >
-            Live Demo
-          </a>
-        </div>
-      </article>
-    ))}
-  </div>
-</section>
-
-<section className="mx-auto max-w-5xl px-6 py-16" id="api-demo">
+      <section className="mx-auto max-w-5xl px-6 py-16" id="api-demo">
         <div className="grid gap-10 md:grid-cols-2 md:items-start">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.25em] text-cyan-400">
@@ -320,10 +362,10 @@ export default function Home() {
             <h2 className="mt-3 text-3xl font-bold">Weather API Demo</h2>
 
             <p className="mt-4 leading-8 text-slate-300">
-             This feature demonstrates a full API flow: the user enters a city,
-             the frontend sends the city to a custom Next.js API route, the backend
-             calls an external weather API, and the result is returned as JSON and
-             displayed on the page.
+              This feature demonstrates a full API flow: the user enters a city,
+              the frontend sends the city to a custom Next.js API route, the
+              backend calls an external weather API, and the result is returned
+              as JSON and displayed on the page.
             </p>
           </div>
 
@@ -377,7 +419,7 @@ export default function Home() {
         </div>
       </section>
 
-<section className="mx-auto max-w-5xl px-6 py-16" id="contact">
+      <section className="mx-auto max-w-5xl px-6 py-16" id="contact">
         <div className="grid gap-10 md:grid-cols-2 md:items-start">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.25em] text-cyan-400">
